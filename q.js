@@ -1,4 +1,3 @@
-// and in the async q.js file
 (function(){
 
 window.q = q || [];
@@ -16,7 +15,7 @@ var emptyQ = function(){
 };
 var run = function(){};
 
-q.push = function(/* string */ method /* , optional args /*){
+q.push = function(/* string */ method /* , optional args */){
 
 };
 
