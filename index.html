@@ -6,15 +6,31 @@
   <title>q</title>
   <link rel="stylesheet" href="style.css" />
   <script>q = [];</script>
-  <script src="q.min.js" async></script>
 </head>
-<body>
-  
-<h1>q.js - Async actions manager</h1>
+<body> 
+	<h1>q.js - Async actions manager</h1>
 
-<p><em>q</em> gives you a queue to store actions for later, async activation.</p>
+	<p><em>q</em> gives you a queue to store actions for later activation.</p>
 
-  <button onclick="q.push(function(){alert('hi there');})">Hello</button>
-  <button onclick="q.push(['listen.mute'])">Mute</button>
+	<!-- Notice you can click these before the app loads, and they will get called later -->
+	<button onclick="q.push( function(){ alert('hi there'); } )">Hello</button>
+	<button onclick="q.push( function(){ myApp.init('first argument.', 'second.'); } )">Some app action</button>
+
+
+	<script>
+	setTimeout(function(){
+	// let's say your app loads really slow, but when it does, this is what it's all about:
+
+	  	myApp = {
+	  		init: function(){
+	  			alert( [].join.call(arguments, ' ') );
+	  		}
+	  	};
+
+	  	// inline q.min.js
+	  	(function(){function b(a){"function"===typeof a&&a()}for(var a=0,c=q.length;a<c;a++)b(q[a]);q.push=b})();
+
+	}, 2000);
+	</script>
 </body>
 </html>
