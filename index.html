@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width">
   <title>q</title>
   <link rel="stylesheet" href="style.css" />
-  <script>window.q = q || [];</script>
-  <script src="q.js" async></script>
+  <script>q = [];</script>
+  <script src="q.min.js" async></script>
 </head>
 <body>
   
@@ -14,7 +14,7 @@
 
 <p><em>q</em> gives you a queue to store actions for later, async activation.</p>
 
-  <button onclick="q.push(['alert', 'hi there'])">Hello</button>
+  <button onclick="q.push(function(){alert('hi there');})">Hello</button>
   <button onclick="q.push(['listen.mute'])">Mute</button>
 </body>
 </html>
