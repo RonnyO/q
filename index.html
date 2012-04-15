@@ -8,14 +8,24 @@
   <script>q = [];</script>
 </head>
 <body> 
-	<h1>q.js - Async actions manager</h1>
+	<h1>q.js - queue your callbacks</h1>
 
-	<p><em>q</em> gives you a queue to store actions for later activation.</p>
+	<p>No matter how you attach your event handlers, you're probably missing something.</p>
+	<p>Normally, you have two choices:
+		<ol>
+			<li>Unobtrosive attachment of events means firing them before the attaching code loads will do nothing</li>
+			<li>Plain old obtrusive <code>onwhatever="something()"</code> results in errors if fired too soon.</li>
+		</ol>
+		<em>q.js</em> solves this with a plain queue for those deffered actions. <br />
+		Refresh this page and immediately click the following buttons, before two seconds go by:</p>
 
-	<!-- Notice you can click these before the app loads, and they will get called later -->
 	<button onclick="q.push( function(){ alert('hi there'); } )">Hello</button>
 	<button onclick="q.push( function(){ myApp.init('first argument.', 'second.'); } )">Some app action</button>
 
+	<p>As you can see, they 'remember' the desired actions and run them ASAP</p>
+	<p>This is done using a quick one-liner in the <code>&lt;head&gt;</code> which declares a global array named q: <code>&lt;script&gt;q = [];&lt;/script&gt;</code>
+	<p>After your app is done loading, just load or embed q.min.js and it will take care of the rest. As simple as:</p>
+	<code>/* q.min.js */ (function(){function b(a){"function"===typeof a&&a()}for(var a=0,c=q.length;a&lt;c;a++)b(q[a]);q.push=b})();</code>
 
 	<script>
 	setTimeout(function(){
